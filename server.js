@@ -11,14 +11,15 @@ const User = require('./models/user');
 const LocationHistory = require('./models/location');
 
 // testing 
+
+// Initialize the app
+const app = express();
 app.get('/', (req, res) => {
   res.json({
     status: 'online',
     timestamp: new Date()
   });
 });
-// Initialize the app
-const app = express();
 
 // Middleware
 app.use(bodyParser.json());
