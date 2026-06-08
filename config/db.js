@@ -1,4 +1,10 @@
 require('dotenv').config(); // Import dotenv to access environment variables
+console.log("DB CONFIG:", {
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT,
+  database: process.env.MYSQL_DATABASE,
+  user: process.env.MYSQL_USER,
+});
 const { Sequelize } = require('sequelize');
 
 // Create a Sequelize instance and connect to the MySQL database
