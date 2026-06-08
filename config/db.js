@@ -1,22 +1,24 @@
 require('dotenv').config(); // Import dotenv to access environment variables
 console.log("DB CONFIG:", {
-  host: process.env.MYSQL_HOST,
-  port: process.env.MYSQL_PORT,
+  host: process.env.MYSQLHOST,
+  port: process.env.MYSQLPORT,
   database: process.env.MYSQL_DATABASE,
-  user: process.env.MYSQL_USER,
+  user: process.env.MYSQLUSER,
 });
+console.log(process.env.MYSQLHOST);
+console.log(process.env.MYSQLPORT);
 const { Sequelize } = require('sequelize');
 
 // Create a Sequelize instance and connect to the MySQL database
 const sequelize = new Sequelize(
-  process.env.MYSQL_DATABASE || 'gltdb', // Database name
-  process.env.MYSQL_USER || 'dfs', // Database username
-  process.env.MYSQL_PASSWORD || 'password', // Database password
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQLUSER,
+  process.env.MYSQLPASSWORD,
   {
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    dialect: 'mysql', // Database dialect
-    logging: false, // Disable logging of SQL queries (optional)
+    host: process.env.MYSQLHOST,
+    port: Number(process.env.MYSQLPORT),
+    dialect: "mysql",
+    logging: false,
   }
 );
 
