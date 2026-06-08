@@ -27,10 +27,15 @@ router.get('/latest/:vehicleId', async (req, res) => {
     });
   }
 });
-// HOME page
-app.get('/', (req, res) => {
-  res.send('Garbage Van Tracker Backend Running');
+// Test page
+router.get('/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Location routes working',
+    timestamp: new Date()
+  });
 });
+
 // Assuming you are using Sequelize for querying the database
 router.post('/new_location_add', async (req, res) => {
     const { vehicleId, latitude, longitude, timestamp } = req.body;
