@@ -21,6 +21,11 @@ const HomeScreen = ({ navigation }) => {
             >
                 <Text style={styles.buttonText}>Go to Login</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('CitizenTracker')}>
+                <Text style={styles.buttonText}>Track Garbage Van</Text>
+            </TouchableOpacity>
         </View>
     );
 };
