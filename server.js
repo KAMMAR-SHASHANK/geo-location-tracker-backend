@@ -34,6 +34,10 @@ sequelize.sync({ alter: true })
   .catch(err => console.error("Error syncing database:", err));
 
 // Routes
+app.use((req, res, next) => {
+  console.log(req.method, req.originalUrl);
+  next();
+});
 app.use('/api/register', registerUserRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/locations', locationRoutes);
