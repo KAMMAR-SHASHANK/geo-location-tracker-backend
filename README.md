@@ -12,20 +12,20 @@ Forked from: [github.com/vilalali/RTVGeolocationTracker](https://github.com/vila
 
 ### What the original repo did
 
-| Feature              | Status |
-| -------------------- | ------ |
-| Register truck       | ✅     |
-| Login truck driver   | ✅     |
-| Save GPS coordinates | ✅     |
-| Retrieve coordinates | ✅     |
+| Feature  
+| -------------------- |
+| Register truck |
+| Login truck driver |
+| Save GPS coordinates |
+| Retrieve coordinates |
 
 The original mobile app displayed only raw latitude and longitude as plain text. There was no map, no real-time updates, and no citizen-facing interface.
 
 ---
 
-## What We Added
+## What I Added
 
-### 🗺️ Live Map Screen (Mobile — React Native)
+### Live Map Screen (Mobile — React Native)
 
 Replaced the plain text coordinate display with a fully interactive map screen (`CitizenTrackerScreen`) using React Native Maps:
 
@@ -34,15 +34,15 @@ Replaced the plain text coordinate display with a fully interactive map screen (
 - Shows the vehicle's route history as a polyline on the map
 - Displays ETA to destination
 
-### 🚗 ETA Tracking
+### ETA Tracking
 
 Added estimated time of arrival calculation based on the vehicle's current coordinates and speed, surfaced on both the citizen-facing screen and the driver screen.
 
-### 👥 Citizen Tracking Screen
+### Citizen Tracking Screen
 
 A new public-facing screen that allows citizens to monitor a tracked vehicle in real time — no login required. Shows live position on the map and ETA.
 
-### 📁 Monorepo Structure
+### Monorepo Structure
 
 Integrated the React Native mobile app into the backend repository using `rsync` (excluding `node_modules` and `.expo`) so both backend and frontend live in one repo without the 349MB bloat.
 
@@ -88,7 +88,7 @@ LocationHistory.belongsTo(User, {
 But in `routes/locationRoutes.js`, the Sequelize query did **not** specify the alias:
 
 ```js
-// ❌ Before (broken)
+//  Before (broken)
 include: {
     model: User,
     attributes: ['vehicleId', 'vehicleType']
@@ -100,7 +100,7 @@ Sequelize requires the `as` value to match exactly when an alias is defined on t
 ### Fix
 
 ```js
-// ✅ After (fixed)
+//  After (fixed)
 include: {
     model: User,
     as: 'user',          // ← alias added to match the association
@@ -196,7 +196,7 @@ DB_NAME=rtv_tracker
 JWT_SECRET=your_jwt_secret
 ```
 
-> ⚠️ Never commit `creds.js` or `.env` — both are listed in `.gitignore`.
+> Never commit `creds.js` or `.env` — both are listed in `.gitignore`.
 
 ---
 
