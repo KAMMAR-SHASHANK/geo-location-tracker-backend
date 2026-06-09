@@ -10,9 +10,16 @@ const locationRoutes = require('./routes/locationRoutes');
 const User = require('./models/user');
 const LocationHistory = require('./models/location');
 
+// testing 
 
 // Initialize the app
 const app = express();
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    timestamp: new Date()
+  });
+});
 
 // Middleware
 app.use(bodyParser.json());
@@ -27,13 +34,17 @@ sequelize.sync({ alter: true })
   .catch(err => console.error("Error syncing database:", err));
 
 // Routes
+app.use((req, res, next) => {
+  console.log(req.method, req.originalUrl);
+  next();
+});
 app.use('/api/register', registerUserRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/locations', locationRoutes);
 
 
 // Start Server
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on http://10.2.219.131:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

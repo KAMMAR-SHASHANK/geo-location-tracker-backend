@@ -4,6 +4,38 @@ const Location = require('../models/location'); // Sequelize model for location
 const User = require('../models/user'); // Sequelize model for user
 const moment = require('moment'); // Used for handling timestamps
 
+// new one citizen
+router.get('/latest/:vehicleId', async (req, res) => {
+  try {
+    const location = await Location.findOne({
+      where: {
+        vehicleId: req.params.vehicleId,
+      },
+      order: [['timestamp', 'DESC']],
+    });
+
+    if (!location) {
+      return res.status(404).json({
+        error: 'No location found',
+      });
+    }
+
+    res.json(location);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+});
+// Test page
+router.get('/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Location routes working',
+    timestamp: new Date()
+  });
+});
+
 // Assuming you are using Sequelize for querying the database
 router.post('/new_location_add', async (req, res) => {
     const { vehicleId, latitude, longitude, timestamp } = req.body;
@@ -38,6 +70,7 @@ router.get('/locations', async (req, res) => {
         const locations = await Location.findAll({
             include: {
                 model: User, // Assuming you have a User model to reference for userId
+                as: 'user',
                 attributes: ['vehicleId', 'vehicleType'], // Adjust attributes as needed
             },
         });
