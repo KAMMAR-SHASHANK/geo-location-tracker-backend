@@ -35,3 +35,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Mobile app
+mobile-app/node_modules/
+mobile-app/.expo/
+mobile-app/creds.js
+.env
+.DS_Store
